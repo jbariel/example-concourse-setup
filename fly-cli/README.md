@@ -4,8 +4,11 @@ Run the concourse docker compose, then download fly, drop it in this folder and 
 ## Build
 `docker build -t fly:latest .`
 
+## Create a volume
+`docker volume create fly`
+
 ## Alias
-`alias fly='docker run --rm fly:latest fly`
+`alias fly='docker run --rm --network concourse_net --mount source=fly,target=/root fly:latest fly`
 
 ## Run
 `fly --version`
