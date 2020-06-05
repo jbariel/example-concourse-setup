@@ -5,10 +5,21 @@ Run the concourse docker compose, then download fly, drop it in this folder and 
 `docker build -t fly:latest .`
 
 ## Create a volume
-`docker volume create fly`
+`docker volume create fly-volume`
 
-## Alias
-`alias fly='docker run --rm --network concourse_net --mount source=fly,target=/root fly:latest fly`
+## Create script
+In: `/usr/local/bin`
+Named: `fly`
+Contents:
+```
+#!/usr/bin/env bash
+FLY_IMG_TAG=latest
+# vvv if you're on windows use this vvv
+# MOUNT_PATH=$(wslpath -w "$PWD")
+# vvv else this vvv
+MOUNT_PATH="$PWD"
+docker run --network concourse_net --rm -it -v "$MOUNT_PATH":/flydir --mount source=fly-volume,target=/root fly:$FLY_IMG_TAG fly "$@"
+```
 
 ## Run
 `fly --version`
