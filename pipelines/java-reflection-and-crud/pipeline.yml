@@ -1,0 +1,15 @@
+jobs:
+  - name: build
+    plan:
+      - task: check_java_version
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: openjdk
+              tag: 8-alpine
+          run:
+            path: java
+            args: ["-version"]
+#https://github.com/jbariel/example-java-reflection-and-crud

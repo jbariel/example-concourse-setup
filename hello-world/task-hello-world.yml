@@ -1,6 +1,3 @@
-#
-# FROM https://github.com/starkandwayne/concourse-tutorial/blob/master/tutorials/basic/task-hello-world/task_hello_world.yml
-#
 jobs:
   - name: hello-world
     plan:
